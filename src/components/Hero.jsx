@@ -54,7 +54,7 @@ export default function Hero() {
             <motion.div initial={{ opacity:0,y:20 }} animate={{ opacity:1,y:0 }} transition={{ delay:0.45 }}
               style={{ display:'flex', gap:'1rem', flexWrap:'wrap', marginBottom:'3rem' }}>
               <a href="#projects" className="btn-primary"><ArrowDown size={15}/>Voir mes projets</a>
-              <a href="/cv.pdf" download className="btn-outline"><Download size={15}/>Télécharger CV</a>
+              <a href="tel:+221767298266" download className="btn-outline"><Download size={15}/>Contactez-moi</a>
             </motion.div>
 
             <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.6 }}
