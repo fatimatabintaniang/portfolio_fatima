@@ -12,7 +12,6 @@ const defaultProjects = [
   { id:'4', title:'Portfolio CMS',        description:'Système de gestion de contenu headless avec API REST et panneau admin moderne.',             tags:['HonoJS','Prisma','PostgreSQL','Cloudinary'], imageUrl:null, featured:false, githubUrl:'https://github.com', liveUrl:'https://example.com' },
 ];
 
-// ✅ Gradients adaptés au mode clair (plus clairs, moins sombres)
 const gradients = [
   'linear-gradient(135deg, #dff5f0, #b8e8de)',
   'linear-gradient(135deg, #dde8f5, #b8cee8)',
@@ -24,8 +23,8 @@ const thumbAccents = ['#0491A9', '#5a9bd4', '#e8935a', '#a07dc4'];
 
 export default function Projects() {
   const [projects, setProjects] = useState(defaultProjects);
-  const [filter, setFilter]     = useState('all');
-  const [showAll, setShowAll]   = useState(false);
+  const [filter,   setFilter]   = useState('all');
+  const [showAll,  setShowAll]  = useState(false);
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   useEffect(() => {
@@ -40,10 +39,11 @@ export default function Projects() {
   return (
     <section id="projects" ref={ref} style={{ padding:'var(--section-pad) 0', background:'var(--void)', borderTop:'1px solid var(--border)', position:'relative', overflow:'hidden' }}>
 
-      {/* Big decorative number ✅ */}
       <div aria-hidden style={{ position:'absolute', bottom:'-5%', right:'-4%', fontFamily:'var(--font-display)', fontSize:'clamp(180px,22vw,360px)', fontWeight:900, color:'transparent', WebkitTextStroke:'1px rgba(4,145,169,0.18)', lineHeight:1, userSelect:'none', pointerEvents:'none' }}>03</div>
 
       <div className="container" style={{ position:'relative', zIndex:1 }}>
+
+        {/* Header */}
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:'4rem', flexWrap:'wrap', gap:'1.5rem' }}>
           <motion.div initial={{ opacity:0, y:30 }} animate={inView ? { opacity:1, y:0 } : {}} transition={{ duration:0.7 }}>
             <p className="section-eyebrow">03 — Projets</p>
@@ -63,13 +63,15 @@ export default function Projects() {
           </motion.div>
         </div>
 
+        {/* Grid */}
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(320px, 1fr))', gap:'2rem' }}>
           <AnimatePresence mode="popLayout">
             {displayedProjects.map((project, i) => (
               <motion.div key={project.id} layout
-                initial={{ opacity:0, y:30 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, scale:0.95 }} transition={{ duration:0.5, delay: i * 0.1 }}
-                style={{ background:'var(--surface)', border:'1px solid var(--border)', borderRadius:'8px', overflow:'hidden', transition:'all 0.35s var(--ease)' }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border-mid)'; e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.12), 0 0 0 1px rgba(4,145,169,0.18)'; }}  // ✅
+                initial={{ opacity:0, y:30 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, scale:0.95 }}
+                transition={{ duration:0.5, delay: i * 0.1 }}
+                style={{ background:'var(--surface)', border:'1px solid var(--border)', borderRadius:'8px', overflow:'hidden', transition:'all 0.35s var(--ease)', display:'flex', flexDirection:'column' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border-mid)'; e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.12), 0 0 0 1px rgba(4,145,169,0.18)'; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>
 
                 {/* Thumbnail */}
@@ -79,55 +81,107 @@ export default function Projects() {
                       <div style={{ fontFamily:'var(--font-display)', fontSize:'6rem', fontWeight:900, color: thumbAccents[i % thumbAccents.length]+'22', lineHeight:1, userSelect:'none' }}>
                         {project.title.charAt(0)}
                       </div>
-                      {/* Grid ✅ adapté fond clair */}
                       <div style={{ position:'absolute', inset:0, backgroundImage:'linear-gradient(rgba(0,0,0,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.06) 1px,transparent 1px)', backgroundSize:'32px 32px' }} />
                       <div style={{ position:'absolute', bottom:'1.25rem', left:'1.75rem', width:'7px', height:'7px', background: thumbAccents[i % thumbAccents.length], borderRadius:'50%', boxShadow:`0 0 10px ${thumbAccents[i % thumbAccents.length]}` }} />
                     </>
                   )}
-                  {/* Bottom fade ✅ */}
                   <div style={{ position:'absolute', inset:0, background:'linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.08) 100%)' }} />
 
                   {project.featured && (
-                    <div style={{ position:'absolute', top:'1rem', left:'1rem', padding:'0.22rem 0.75rem', background:'var(--emerald)', color:'var(--void)', fontFamily:'var(--font-mono)', fontSize:'0.62rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', borderRadius:'100px', zIndex:2 }}>
+                    <div style={{ position:'absolute', top:'1rem', left:'1rem', padding:'0.22rem 0.75rem', background:'var(--emerald)', color:'#fff', fontFamily:'var(--font-mono)', fontSize:'0.62rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', borderRadius:'100px', zIndex:2 }}>
                       Featured
                     </div>
                   )}
 
-                  {/* Action links ✅ fond adapté */}
-                  <div style={{ position:'absolute', top:'1rem', right:'1rem', display:'flex', gap:'0.4rem', zIndex:2 }}>
-                    {project.githubUrl && (
+                  {/* ✅ Uniquement le bouton GitHub sur la thumbnail */}
+                  {project.githubUrl && (
+                    <div style={{ position:'absolute', top:'1rem', right:'1rem', zIndex:2 }}>
                       <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
+                        title="Voir le code source"
                         style={{ width:'34px', height:'34px', background:'rgba(255,255,255,0.85)', border:'1px solid var(--border-mid)', borderRadius:'4px', display:'flex', alignItems:'center', justifyContent:'center', color:'var(--fog)', transition:'all 0.25s' }}
                         onMouseEnter={e => { e.currentTarget.style.background = 'var(--emerald)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--emerald)'; }}
                         onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.85)'; e.currentTarget.style.color = 'var(--fog)'; e.currentTarget.style.borderColor = 'var(--border-mid)'; }}>
                         <Github size={13} />
                       </a>
-                    )}
-                    {project.liveUrl && (
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
-                        style={{ width:'34px', height:'34px', background:'rgba(255,255,255,0.85)', border:'1px solid var(--border-mid)', borderRadius:'4px', display:'flex', alignItems:'center', justifyContent:'center', color:'var(--fog)', transition:'all 0.25s' }}
-                        onMouseEnter={e => { e.currentTarget.style.background = 'var(--emerald)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--emerald)'; }}
-                        onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.85)'; e.currentTarget.style.color = 'var(--fog)'; e.currentTarget.style.borderColor = 'var(--border-mid)'; }}>
-                        <ExternalLink size={13} />
-                      </a>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
 
-                <div style={{ padding:'1.75rem' }}>
-                  <h3 style={{ fontFamily:'var(--font-display)', fontSize:'1.4rem', fontWeight:700, color:'var(--white)', marginBottom:'0.7rem', lineHeight:1.2 }}>{project.title}</h3>
-                  <p style={{ color:'var(--fog)', fontSize:'0.9rem', lineHeight:1.8, marginBottom:'1.25rem' }}>{project.description}</p>
-                  <div style={{ display:'flex', flexWrap:'wrap', gap:'0.4rem' }}>
+                {/* Contenu */}
+                <div style={{ padding:'1.75rem', display:'flex', flexDirection:'column', flex:1 }}>
+                  <h3 style={{ fontFamily:'var(--font-display)', fontSize:'1.4rem', fontWeight:700, color:'var(--white)', marginBottom:'0.7rem', lineHeight:1.2 }}>
+                    {project.title}
+                  </h3>
+                  <p style={{ color:'var(--fog)', fontSize:'0.9rem', lineHeight:1.8, marginBottom:'1.25rem' }}>
+                    {project.description}
+                  </p>
+                  <div style={{ display:'flex', flexWrap:'wrap', gap:'0.4rem', marginBottom:'1.5rem' }}>
                     {project.tags?.map(tag => <span key={tag} className="tag">{tag}</span>)}
                   </div>
+
+                  {/* ✅ Bouton "Voir le projet" en bas de la carte */}
+                  {project.liveUrl ? (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        marginTop: 'auto',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        padding: '0.65rem 1.25rem',
+                        background: 'var(--emerald-dim)',
+                        border: '1px solid var(--emerald)',
+                        color: 'var(--emerald)',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        letterSpacing: '0.08em',
+                        textTransform: 'uppercase',
+                        borderRadius: '4px',
+                        transition: 'all 0.25s',
+                        textDecoration: 'none',
+                        alignSelf: 'flex-start',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.background = 'var(--emerald)';
+                        e.currentTarget.style.color = '#fff';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.background = 'var(--emerald-dim)';
+                        e.currentTarget.style.color = 'var(--emerald)';
+                      }}>
+                      <ExternalLink size={13} />
+                      Voir le projet
+                    </a>
+                  ) : (
+                    /* ✅ Si pas de liveUrl, afficher un badge discret */
+                    <span style={{
+                      marginTop: 'auto',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.7rem',
+                      color: 'var(--mist)',
+                      letterSpacing: '0.06em',
+                      alignSelf: 'flex-start',
+                    }}>
+                      <span style={{ width:'6px', height:'6px', background:'var(--mist)', borderRadius:'50%', display:'inline-block', opacity:0.5 }} />
+                      Projet privé
+                    </span>
+                  )}
                 </div>
               </motion.div>
             ))}
           </AnimatePresence>
         </div>
 
+        {/* Bouton voir plus */}
         {filtered.length > 3 && (
-          <motion.div initial={{ opacity:0, y:20 }} animate={inView ? { opacity:1, y:0 } : {}} transition={{ delay:0.5 }} style={{ display:'flex', justifyContent:'center', marginTop:'3rem' }}>
+          <motion.div initial={{ opacity:0, y:20 }} animate={inView ? { opacity:1, y:0 } : {}} transition={{ delay:0.5 }}
+            style={{ display:'flex', justifyContent:'center', marginTop:'3rem' }}>
             <button onClick={() => setShowAll(!showAll)}
               style={{ display:'flex', alignItems:'center', gap:'0.75rem', padding:'0.9rem 2.5rem', background:'transparent', border:'1px solid var(--border)', borderRadius:'4px', color:'var(--fog)', fontFamily:'var(--font-mono)', fontSize:'0.85rem', letterSpacing:'0.1em', textTransform:'uppercase', cursor:'pointer', transition:'all 0.3s var(--ease)' }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--emerald)'; e.currentTarget.style.color = 'var(--emerald)'; }}
