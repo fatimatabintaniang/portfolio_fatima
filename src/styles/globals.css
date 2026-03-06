@@ -55,8 +55,10 @@ body {
 
 /* ── Navbar scrolled ── */
 .navbar.scrolled {
-  background: rgba(255, 255, 255, 0.92);   /* ← blanc au lieu de noir */
+  background: rgba(255, 255, 255, 0.92); /* blanc au lieu de noir */
+  backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
 /* ── Noise overlay (réduire l'opacité) ── */
