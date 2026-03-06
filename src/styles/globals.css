@@ -1,5 +1,5 @@
 /* ============================================
-   PORTFOLIO — Dark Botanical Luxe
+   PORTFOLIO — Light Mode
    Fonts: Fraunces (display) + Outfit (body) + Fira Code (mono)
    ============================================ */
 
@@ -13,7 +13,7 @@
   --surface-2:   #e2e8f0;
   --surface-3:   #cbd5e1;
 
-  --emerald:     #0491A9;       /* tu gardes ta couleur principale */
+  --emerald:     #0491A9;
   --emerald-dim: rgba(4, 145, 169, 0.08);
   --emerald-mid: rgba(4, 145, 169, 0.18);
   --emerald-glow:rgba(4, 145, 169, 0.25);
@@ -22,23 +22,41 @@
   --copper-dim:  rgba(194, 98, 26, 0.1);
   --copper-mid:  rgba(194, 98, 26, 0.2);
 
-  --white:       #0f172a;       /* ← texte principal (maintenant sombre) */
-  --fog:         #334155;       /* ← texte secondaire */
+  --white:       #0f172a;
+  --fog:         #334155;
   --mist:        #64748b;
 
   --border:      rgba(4, 145, 169, 0.12);
   --border-mid:  rgba(4, 145, 169, 0.25);
   --border-dark: rgba(0, 0, 0, 0.08);
 
+  /* ── Typography ── */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'Outfit', sans-serif;
+  --font-mono:    'Fira Code', monospace;
+
+  /* ── Spacing ── */
+  --section-pad: clamp(4rem, 7vw, 7rem);   /* ✅ réduit pour éviter les écarts trop grands */
+  --navbar-h:    72px;                      /* ✅ hauteur navbar pour offset des sections */
+
   /* ── Shadows ── */
   --shadow-soft:    0 4px 24px rgba(0, 0, 0, 0.08);
   --shadow-card:    0 8px 40px rgba(0, 0, 0, 0.12);
   --shadow-emerald: 0 8px 32px rgba(4, 145, 169, 0.25);
+
+  /* ── Easing ── */
+  --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  /* ✅ offset scroll pour que les sections ne soient pas cachées sous la navbar */
+  scroll-padding-top: var(--navbar-h);
+}
 
 body {
   background: var(--void);
@@ -48,27 +66,6 @@ body {
   line-height: 1.75;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-}
-
-/* ── Scrollbar ── */
-::-webkit-scrollbar-track { background: var(--deep); }
-
-/* ── Navbar scrolled ── */
-.navbar.scrolled {
-  background: rgba(255, 255, 255, 0.92); /* blanc au lieu de noir */
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-}
-
-/* ── Noise overlay (réduire l'opacité) ── */
-body::after {
-  opacity: 0.15;   /* ← moins visible sur fond clair */
-}
-
-/* ── Bouton primaire (texte reste lisible) ── */
-.btn-primary {
-  color: #ffffff;   /* ← texte blanc sur fond emerald */
 }
 
 /* ── Scrollbar ── */
@@ -98,7 +95,7 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.45;
+  opacity: 0.15;   /* ✅ discret sur fond clair */
 }
 
 /* ── Layout ── */
@@ -108,20 +105,32 @@ body::after {
   padding: 0 clamp(1.5rem, 5vw, 4rem);
 }
 
+/* ── Sections ── */
+/* ✅ Toutes les sections (sauf Hero) ont un padding-top
+   qui compense la navbar fixe */
+section:not(#hero) {
+  scroll-margin-top: var(--navbar-h);
+}
+
 /* ── Navbar ── */
 .navbar {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 200;
-  padding: 1.5rem 0;
+  height: var(--navbar-h);
+  padding: 0;                         /* ✅ on gère la hauteur via height */
+  display: flex;
+  align-items: center;
   transition: all 0.4s var(--ease);
 }
+
+/* ✅ CORRIGÉ : fond blanc au scroll (plus le fond sombre) */
 .navbar.scrolled {
-  padding: 1rem 0;
-  background: rgba(8, 11, 15, 0.92);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
 }
 
 /* ── Section eyebrow ── */
@@ -178,7 +187,7 @@ body::after {
   gap: 0.6rem;
   padding: 0.9rem 2.2rem;
   background: var(--emerald);
-  color: var(--void);
+  color: #ffffff;                     /* ✅ toujours blanc sur fond coloré */
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 0.875rem;
@@ -232,6 +241,29 @@ body::after {
   box-shadow: var(--shadow-card), 0 0 0 1px var(--emerald-mid);
 }
 
+/* ── Cursor custom ── */
+.cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--emerald);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transition: transform 0.15s var(--ease);
+}
+.cursor-follower {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--emerald);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  opacity: 0.4;
+  transition: transform 0.1s linear, opacity 0.3s;
+}
+
 /* ── Animations ── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
@@ -242,8 +274,8 @@ body::after {
   to   { opacity: 1; }
 }
 @keyframes pulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(45, 212, 160, 0.4); }
-  50%       { opacity: 0.7; box-shadow: 0 0 0 6px rgba(45, 212, 160, 0); }
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(4, 145, 169, 0.4); }  /* ✅ */
+  50%       { opacity: 0.7; box-shadow: 0 0 0 6px rgba(4, 145, 169, 0); }
 }
 @keyframes blobFloat {
   0%, 100% { transform: translate(0, 0) scale(1); }
@@ -265,8 +297,14 @@ body::after {
   border-radius: 4px;
 }
 
-/* ── Mobile ── */
+/* ── Responsive ── */
 @media (max-width: 768px) {
   .nav-desktop { display: none !important; }
   .burger-btn  { display: flex !important; }
+
+  /* ✅ Padding réduit sur mobile */
+  :root {
+    --section-pad: clamp(3rem, 6vw, 5rem);
+    --navbar-h: 64px;
+  }
 }
