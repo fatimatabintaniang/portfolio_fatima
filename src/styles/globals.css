@@ -13,10 +13,10 @@
   --surface-2:   #e2e8f0;
   --surface-3:   #cbd5e1;
 
-  --emerald:     #0491A9;
-  --emerald-dim: rgba(4, 145, 169, 0.08);
-  --emerald-mid: rgba(4, 145, 169, 0.18);
-  --emerald-glow:rgba(4, 145, 169, 0.25);
+  --emerald:     #1B2A4E;
+  --emerald-dim: rgba(27, 42, 78, 0.08);
+  --emerald-mid: rgba(27, 42, 78, 0.18);
+  --emerald-glow:rgba(27, 42, 78, 0.25);
 
   --copper:      #c2621a;
   --copper-dim:  rgba(194, 98, 26, 0.1);
