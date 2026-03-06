@@ -55,7 +55,7 @@ export default function Navbar() {
             ))}
           </motion.ul>
 
-          <motion.a href="/cv.pdf" download target="_blank" rel="noopener noreferrer" className="nav-desktop"
+          <motion.a href="/cv.pdf"  className="nav-desktop"
             initial={{ opacity:0,x:16 }} animate={{ opacity:1,x:0 }} transition={{ duration:0.6, delay:0.3 }}
             style={{ display:'inline-flex', alignItems:'center', gap:'0.5rem', padding:'0.6rem 1.4rem', background:'transparent', border:'1px solid var(--emerald)', color:'var(--emerald)', fontFamily:'var(--font-body)', fontSize:'0.78rem', fontWeight:600, letterSpacing:'0.08em', textTransform:'uppercase', borderRadius:'2px', transition:'all 0.3s', cursor:'pointer' }}
             onMouseEnter={e => { e.currentTarget.style.background='var(--emerald-dim)'; e.currentTarget.style.boxShadow='0 0 20px rgba(45,212,160,0.2)'; }}
