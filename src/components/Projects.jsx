@@ -6,8 +6,8 @@ import { ExternalLink, Github, ArrowUpRight } from 'lucide-react';
 import { projectsAPI } from '../services/api';
 
 const defaultProjects = [
-  { id:'1', title:'E-Commerce Platform',  description:'Plateforme e-commerce complète avec panier, paiements et gestion inventaire.',               tags:['React','Node.js','PostgreSQL','Stripe'], imageUrl:null, featured:true,  githubUrl:'https://github.com', liveUrl:'https://example.com' },
-  { id:'2', title:'Dashboard Analytics',  description:'Tableau de bord en temps réel avec visualisations interactives et rapports automatisés.',    tags:['React','D3.js','WebSocket','MongoDB'],   imageUrl:null, featured:true,  githubUrl:'https://github.com', liveUrl:null },
+  { id:'1', title:'Application des gestions Bibliotheque',  description:'Mise en place d\'une application de gestion de bibliotheque',               tags:['JavaScript','Node.js','PostgreSQL'], imageUrl:null, featured:true,  githubUrl:'https://github.com', liveUrl:'https://example.com' },
+  { id:'2', title:'Application de Gestion scolaire',  description:'Mise en place d\'une application de gestion scolaire ',    tags:['React','WebSocket','Postgres'],   imageUrl:null, featured:true,  githubUrl:'https://github.com', liveUrl:null },
   { id:'3', title:'Mobile Banking App',   description:'Application bancaire mobile sécurisée avec transferts instantanés et analytics.',            tags:['React Native','Node.js','Redis','JWT'],  imageUrl:null, featured:false, githubUrl:'https://github.com', liveUrl:null },
   { id:'4', title:'Portfolio CMS',        description:'Système de gestion de contenu headless avec API REST et panneau admin moderne.',             tags:['HonoJS','Prisma','PostgreSQL','Cloudinary'], imageUrl:null, featured:false, githubUrl:'https://github.com', liveUrl:'https://example.com' },
 ];
@@ -93,7 +93,7 @@ export default function Projects() {
                     </div>
                   )}
 
-                  {/* ✅ Uniquement le bouton GitHub sur la thumbnail */}
+                  {/*  Uniquement le bouton GitHub sur la thumbnail */}
                   {project.githubUrl && (
                     <div style={{ position:'absolute', top:'1rem', right:'1rem', zIndex:2 }}>
                       <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
@@ -119,7 +119,7 @@ export default function Projects() {
                     {project.tags?.map(tag => <span key={tag} className="tag">{tag}</span>)}
                   </div>
 
-                  {/* ✅ Bouton "Voir le projet" en bas de la carte */}
+                  {/*  Bouton "Voir le projet" en bas de la carte */}
                   {project.liveUrl ? (
                     <a
                       href={project.liveUrl}
@@ -156,7 +156,7 @@ export default function Projects() {
                       Voir le projet
                     </a>
                   ) : (
-                    /* ✅ Si pas de liveUrl, afficher un badge discret */
+                    /*  Si pas de liveUrl, afficher un badge discret */
                     <span style={{
                       marginTop: 'auto',
                       display: 'inline-flex',

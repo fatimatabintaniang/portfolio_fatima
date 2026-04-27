@@ -6,7 +6,6 @@ import { skillsAPI } from '../services/api';
 
 const defaultSkills = [
   { name:'React / Next.js', level:92, category:'frontend' },
-  { name:'TypeScript',      level:85, category:'frontend' },
   { name:'CSS / Tailwind',  level:90, category:'frontend' },
   { name:'Node.js / HonoJS',level:88, category:'backend'  },
   { name:'PostgreSQL',      level:80, category:'database'  },
@@ -16,7 +15,7 @@ const defaultSkills = [
   { name:'Git / GitHub',    level:90, category:'tools'     },
   { name:'Figma',           level:75, category:'design'    },
   { name:'Python',          level:68, category:'backend'   },
-  { name:'MongoDB',         level:74, category:'database'  },
+  { name:'Java',         level:74, category:'backend'  },
 ];
 
 const categories = ['all','frontend','backend','database','devops','tools','design'];
@@ -37,7 +36,7 @@ export default function Skills() {
   return (
     <section id="skills" ref={ref} style={{ padding:'var(--section-pad) 0', background:'var(--deep)', position:'relative', overflow:'hidden' }}>
 
-      {/* Big decorative number ✅ */}
+      {/* Big decorative number  */}
       <div aria-hidden style={{ position:'absolute', top:'50%', left:'-3%', transform:'translateY(-50%)', fontFamily:'var(--font-display)', fontSize:'clamp(180px,22vw,360px)', fontWeight:900, color:'transparent', WebkitTextStroke:'1px rgba(4,145,169,0.18)', lineHeight:1, userSelect:'none', pointerEvents:'none' }}>02</div>
 
       <div className="container" style={{ position:'relative', zIndex:1 }}>
@@ -75,7 +74,7 @@ export default function Skills() {
                   <span style={{ fontFamily:'var(--font-body)', fontWeight:600, fontSize:'0.95rem', color:'var(--white)', lineHeight:1.3 }}>{s.name}</span>
                   <span style={{ fontFamily:'var(--font-mono)', fontSize:'1rem', color, fontWeight:500, flexShrink:0, marginLeft:'0.5rem' }}>{s.level}%</span>
                 </div>
-                {/* Progress bar ✅ fond adapté au mode clair */}
+                {/* Progress bar  fond adapté au mode clair */}
                 <div style={{ height:'3px', background:'rgba(0,0,0,0.08)', borderRadius:'4px', overflow:'hidden', marginBottom:'0.85rem' }}>
                   <motion.div
                     initial={{ width:0 }}
@@ -88,6 +87,7 @@ export default function Skills() {
               </motion.div>
             );
           })}
+
         </div>
       </div>
     </section>

@@ -78,8 +78,8 @@ export default function Navbar() {
               listStyle: 'none',
               gap: '1.75rem',
               alignItems: 'center',
-              flex: 1,                    /* ✅ prend l'espace disponible */
-              justifyContent: 'center',   /* ✅ centré entre logo et bouton */
+              flex: 1,                    /* prend l'espace disponible */
+              justifyContent: 'center',   /* centré entre logo et bouton */
               margin: 0,
               padding: 0,
             }}>

@@ -8,32 +8,12 @@ import { experienceAPI } from '../services/api';
 const defaultExperiences = [
   {
     id: '1',
-    company: 'TechStartup Dakar',
+    company: 'Ecole SUP 221',
     role: 'Développeuse Full Stack Senior',
     description: 'Architecture et développement de plateformes SaaS B2B. Leading une équipe de 3 développeurs, mise en place CI/CD avec GitHub Actions, optimisation des performances API de 40%.',
     startDate: '2023-01-01',
     current: true,
     location: 'Dakar, Sénégal',
-  },
-  {
-    id: '2',
-    company: 'Digital Agency Africa',
-    role: 'Développeuse Frontend',
-    description: "Création d'interfaces utilisateur complexes pour des clients dans la fintech et l'e-commerce. Adoption de React Query et optimisation du rendu pour réduire le LCP de 60%.",
-    startDate: '2021-06-01',
-    endDate: '2022-12-31',
-    current: false,
-    location: "Abidjan, Côte d'Ivoire",
-  },
-  {
-    id: '3',
-    company: 'Freelance',
-    role: 'Développeuse Web',
-    description: "Développement de sites web et applications pour PME locales. Plus de 10 projets livrés couvrant e-commerce, portfolios et applications métier.",
-    startDate: '2020-01-01',
-    endDate: '2021-05-31',
-    current: false,
-    location: 'Remote',
   },
 ];
 
