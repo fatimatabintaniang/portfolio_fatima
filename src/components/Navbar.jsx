@@ -36,7 +36,7 @@ export default function Navbar() {
         zIndex: 200,
         transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       }}>
-        {/* ✅ On n'utilise PAS .container ici pour éviter le double padding */}
+        {/*  On n'utilise PAS .container ici pour éviter le double padding */}
         <div style={{
           maxWidth: '1240px',
           margin: '0 auto',
